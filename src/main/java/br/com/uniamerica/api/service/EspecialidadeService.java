@@ -8,9 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author Eduardo Sganderla
@@ -72,9 +71,9 @@ public class EspecialidadeService {
      * @param especialidade
      */
     @Transactional
-    public void updateStatus(Long id, Especialidade especialidade){
+    public void updateDataExcluido(Long id, Especialidade especialidade){
         if (id == especialidade.getId()) {
-            this.especialidadeRepository.updateStatus(especialidade.getId());
+            this.especialidadeRepository.updateDataExcluido(especialidade.getId(), LocalDateTime.now());
         }
         else {
             throw new RuntimeException();
