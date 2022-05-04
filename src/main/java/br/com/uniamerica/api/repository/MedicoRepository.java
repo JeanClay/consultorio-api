@@ -35,5 +35,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
             "SET medico.excluido = :dataEX" +
             "WHERE medico.id = :medico")
     public void updateDataExcluido(@Param("medico")Long idMedico
-                            , @Param("dataEx") LocalDateTime dataEx);
+                                 , @Param("dataEx") LocalDateTime dataEx);
 }

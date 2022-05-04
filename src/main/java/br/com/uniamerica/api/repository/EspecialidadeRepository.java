@@ -28,6 +28,6 @@ public interface EspecialidadeRepository extends JpaRepository<Especialidade, Lo
             "SET especialidade.excluido = :dataEx " +
             "WHERE especialidade.id = :especialidade")
     public void updateDataExcluido(@Param("especialidade") Long idEspecialidade
-                            , @Param("dataEx") LocalDateTime dataEx);
+                                 , @Param("dataEx") LocalDateTime dataEx);
 
 }
