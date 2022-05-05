@@ -40,6 +40,7 @@ public class SecretariaService {
         this.secretariaRepository.save(secretaria);
     }
 
+    @Transactional
     public void updateDataExcluido(Long id, Secretaria secretaria){
         if (id == secretaria.getId()){
             this.secretariaRepository.updateDataExcluido(secretaria.getId(), LocalDateTime.now());

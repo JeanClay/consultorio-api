@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class MedicoService {
     public Page<Medico> listAll (Pageable pageable){
         return this.medicoRepository.findAll(pageable);
     }
-
+    @Transactional
     public void update(Long id, Medico medico){
         if (id == medico.getId()){
             this.medicoRepository.save(medico);
@@ -32,11 +33,11 @@ public class MedicoService {
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     public void insert(Medico medico){
         this.medicoRepository.save(medico);
     }
-
+    @Transactional
     public void updateDataExcluido(Long id, Medico medico){
         if (id == medico.getId()){
             this.medicoRepository.updateDataExcluido(medico.getId(), LocalDateTime.now());
