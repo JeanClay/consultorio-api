@@ -109,7 +109,7 @@ public class PacienteService {
             if (paciente.getDataVencimento() == null){
                 throw new RuntimeException(" Data de vencimento nao informada ");
             }
-            if (paciente.getDataVencimento().compareTo(LocalDateTime.now()) > 0){
+            if (paciente.getDataVencimento().compareTo(LocalDateTime.now()) <= 0){
                 throw new RuntimeException(" Data de vencimento expirada ");
             }
         }
