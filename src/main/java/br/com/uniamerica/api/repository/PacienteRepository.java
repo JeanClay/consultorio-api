@@ -25,8 +25,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
      */
     @Modifying
     @Query("UPDATE Paciente paciente " +
-            "SET medico.excluido = :dataEx " +
-            "WHERE medico.id = :paciente")
+            "SET paciente.excluido = :dataEx " +
+            "WHERE paciente.id = :paciente")
     public void updateDataExcluido(@Param("paciente") Long idPaciente,
                                    @Param("dataEx") LocalDateTime dataEx);
 }

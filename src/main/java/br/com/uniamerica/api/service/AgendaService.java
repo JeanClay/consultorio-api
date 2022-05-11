@@ -35,6 +35,7 @@ public class AgendaService {
         }
     }
 
+    @Transactional
     public void setAprovado(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if (agenda.getStatus().valor.equals("Pendente")) {
@@ -49,6 +50,7 @@ public class AgendaService {
         }
     }
 
+    @Transactional
     public void setRejeitado(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if (agenda.getStatus().valor.equals("Pendente")) {
@@ -63,6 +65,7 @@ public class AgendaService {
         }
     }
 
+    @Transactional
     public void setCancelado(Long id, Agenda agenda){
         if(id == agenda.getId()){
             agenda.setStatus(StatusAgenda.cancelado);
@@ -73,6 +76,7 @@ public class AgendaService {
         }
     }
 
+    @Transactional
     public void setCompareceu(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if(agenda.getStatus().valor.equals("Aprovado")) {
@@ -84,6 +88,8 @@ public class AgendaService {
             throw new RuntimeException();
         }
     }
+
+    @Transactional
     public void SetNaoCompareceu(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if(agenda.getStatus().valor.equals("Aprovado")) {
