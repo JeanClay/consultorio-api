@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -102,6 +103,10 @@ public class AgendaService {
         }
     }
 
+//    consultorio nao abre no domingo(ver se e domingo e se for, nao deixar agendar)
+    public boolean isSunday(Agenda agenda){
+        if(agenda.getDataDe().getDayOfWeek())
+    }
 
 //    public boolean isValidAgenda(Agenda agenda){
 //        if (agenda.getDataDe().compareTo(LocalDateTime.now()) == 1){
