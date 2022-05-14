@@ -104,9 +104,9 @@ public class AgendaService {
     }
 
 //    consultorio nao abre no domingo(ver se e domingo e se for, nao deixar agendar)
-    public boolean isSunday(Agenda agenda){
-        if(agenda.getDataDe().getDayOfWeek())
-    }
+//    public boolean isSunday(Agenda agenda){
+//        if(agenda.getDataDe().getDayOfWeek())
+//    }
 
 //    public boolean isValidAgenda(Agenda agenda){
 //        if (agenda.getDataDe().compareTo(LocalDateTime.now()) == 1){
