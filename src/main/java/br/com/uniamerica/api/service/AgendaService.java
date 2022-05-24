@@ -39,13 +39,12 @@ public class AgendaService {
         }
     }
 
-    @Transactional
     public void setAprovado(Long id, Agenda agenda){
         if (agenda != null){
             if (id == agenda.getId()) {
                 if ( agenda.getStatus().valor.equals("Pendente")) {
                      agenda.setStatus(StatusAgenda.aprovado);
-                    this.agendaRepository.save(agenda);
+                    this.updateStatusAgenda(agenda);
                     //this.historicoRepository.salvarNovo(agenda);
                 } else {
                     throw new RuntimeException(" Status Diferente de Pendente");
@@ -56,12 +55,11 @@ public class AgendaService {
         }
     }
 
-    @Transactional
     public void setRejeitado(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if (agenda.getStatus().valor.equals("Pendente")) {
                 agenda.setStatus(StatusAgenda.rejeitado);
-                this.agendaRepository.save(agenda);
+                this.updateStatusAgenda(agenda);
                 //this.historicoRepository.salvarNovo(agenda);
             }else{
                 throw new RuntimeException(" Status Diferente de Pendente");
@@ -71,12 +69,11 @@ public class AgendaService {
         }
     }
 
-    @Transactional
     public void setCancelado(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if(agenda.getStatus().equals(StatusAgenda.aprovado) || agenda.getStatus().equals(StatusAgenda.pendente)){
                 agenda.setStatus(StatusAgenda.cancelado);
-                this.agendaRepository.save(agenda);
+                this.updateStatusAgenda(agenda);
                 //this.historicoRepository.salvarNovo(agenda);}
             }else{
                 throw new RuntimeException();
@@ -86,12 +83,24 @@ public class AgendaService {
         }
     }
 
-    @Transactional
+
     public void setCompareceu(Long id, Agenda agenda){
         if(id == agenda.getId()){
             if(agenda.getStatus().valor.equals("Aprovado")) {
                 agenda.setStatus(StatusAgenda.compareceu);
-                this.agendaRepository.save(agenda);
+                this.updateStatusAgenda(agenda);
+                //this.historicoRepository.salvarNovo(agenda);
+            }
+        }else{
+            throw new RuntimeException();
+        }
+    }
+
+    public void setNaoCompareceu(Long id, Agenda agenda){
+        if(id == agenda.getId()){
+            if(agenda.getStatus().valor.equals("Aprovado")) {
+                agenda.setStatus(StatusAgenda.nao_compareceu);
+                this.updateStatusAgenda(agenda);
                 //this.historicoRepository.salvarNovo(agenda);
             }
         }else{
@@ -100,18 +109,9 @@ public class AgendaService {
     }
 
     @Transactional
-    public void SetNaoCompareceu(Long id, Agenda agenda){
-        if(id == agenda.getId()){
-            if(agenda.getStatus().valor.equals("Aprovado")) {
-                agenda.setStatus(StatusAgenda.nao_compareceu);
-                this.agendaRepository.save(agenda);
-                //this.historicoRepository.salvarNovo(agenda);
-            }
-        }else{
-            throw new RuntimeException();
-        }
+    public void updateStatusAgenda(Agenda agenda){
+        this.agendaRepository.save(agenda);
     }
-
 
     public boolean isValidData(Agenda agenda){
         return true;
@@ -194,7 +194,7 @@ public class AgendaService {
     public void updateAgendaTransaction(Agenda agenda){
         this.agendaRepository.save(agenda);
     }
-//
+
 //    public boolean checkConflictProfessor(Agenda agenda){
 //        List<Agenda> conflitos = this.agendaRepository.haveConflict(
 //                agenda.getDataDe(),
@@ -204,17 +204,17 @@ public class AgendaService {
 //                agenda.getId());
 //
 //    }
-
-    public void updateAgendaProfessor(Agenda agenda){
-        Assert.isTrue(!isPast(agenda), "Esta no Passado");
-        Assert.isTrue(validTime(agenda), "Hora ate antes de hora de");
-        Assert.isTrue(isRightTime(agenda), "Agendamento fora de horario comercial");
-        Assert.isTrue(!isWeekend(agenda), "Agendamento no fim de semana");
+//
+//    public void updateAgendaProfessor(Agenda agenda){
+//        Assert.isTrue(!isPast(agenda), "Esta no Passado");
+//        Assert.isTrue(validTime(agenda), "Hora ate antes de hora de");
+//        Assert.isTrue(isRightTime(agenda), "Agendamento fora de horario comercial");
+//        Assert.isTrue(!isWeekend(agenda), "Agendamento no fim de semana");
 //        Assert.isTrue();
-        if(isEncaixe(agenda)){
-
-        }
-    }
+//        if(isEncaixe(agenda)){
+//
+//        }
+//    }
     public void updateAgenda(Agenda agenda, Secretaria secretaria){
         if(!isPast(agenda)){
             if(validTime(agenda)){
