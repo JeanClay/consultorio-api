@@ -172,10 +172,9 @@ public class AgendaService {
                 return false;
             case 1:
                 return agenda.getId().equals(conflitos.get(0).getId()) ? false : true;
-            case 2:
+            default:
                 return true;
         }
-        return false;
     }
 
     public boolean checkConflictPaciente(Agenda agenda){
@@ -185,10 +184,9 @@ public class AgendaService {
                 return false;
             case 1:
                 return agenda.getId().equals(conflitos.get(0).getId()) ? false : true;
-            case 2:
+            default:
                 return true;
         }
-        return false;
     }
     @Transactional
     public void updateAgendaTransaction(Agenda agenda){
@@ -262,7 +260,7 @@ public class AgendaService {
                             if(checkConflictMedico(agenda)){
                                 if(checkConflictPaciente(agenda)){
                                     agenda.setStatus(StatusAgenda.aprovado);
-                                    updateAgenda(agenda);
+                                    updateAgendaTransaction(agenda);
                                 }
                             }
                         }
@@ -281,7 +279,7 @@ public class AgendaService {
                             if(checkConflictMedico(agenda)){
                                 if(checkConflictPaciente(agenda)){
                                     agenda.setStatus(StatusAgenda.pendente);
-                                    updateAgenda(agenda);
+                                    updateAgendaTransaction(agenda);
                                 }
                             }
                         }
